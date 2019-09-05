@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" id="styleguide">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>BLDC</title>
+
+        <link rel="stylesheet" href="static/css/animate.css">
+        <link rel="stylesheet" href="static/css/cui-styleguide.min.css">
+        <link rel="stylesheet" href="static/css/featherlight.min.css">
+        <link rel="icon" href="assets/img/favicon.png" type="image/x-icon">
+
+        <script src="https://code.jquery.com/jquery-3.0.0.min.js" integrity="sha256-JmvOoLtYsmqlsWxa7mDSLMwa6dZ9rrIdtrrVYRnDRH0=" crossorigin="anonymous"></script>
+        <script src="static/js/styleguide.js"></script>
+        <script src="static/js/jquery-scrollto.js"></script>
+        <script src="static/js/clipboard.js"></script>
+        <script src="static/js/featherlight.min.js"></script>
+        <script src="static/js/Markdown.Converter.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    </head>
+    <body class="cui styleguide">
+
+        <div class="content-fluid">
+            <nav id="styleguideSidebar" class="sidebar">
+                <div class="sidebar__header">
+                    <div class="sidebar__header-title">BLDC Cloud Station</div>
+                </div>
+                <ul id="rootSidebar" data-kss-ref="styleguide.homepage">
+                    <li class="sidebar__item" id="section-gettingStarted">
+                        <a>Home</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <main>
+                <header id="styleguideHeader" class="header header--compressed">
+                    <div class="header-bar container">
+                        <a class="btn btn--small btn--icon toggle-menu">
+                            <span class="icon-list-menu"></span>
+                        </a>
+                        <div class="header-bar__main">
+                            <div class="header-heading">
+                                <h1 class="page-title">BLDC Cloud Station</h1>
+                            </div>
+                        </div>
+                        <div class="header-toolbar">
+                            <a class="btn btn--small btn--icon" href="mailto:atlantic-ui-styleguide@external.cisco.com?Subject=Feedback" title="Submit Feedback">
+                                <span class="icon-feedback"></span>
+                            </a>
+                        </div>
+                    </div>
+                </header>
+                <div class="content"> <div class="hero hero--indigo">
+
+</div>
+<div class="container">
+
+        <div class="section">
+            	<div class="row" id="alertid">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                      {% if messages %}
+                        {% for category, message in messages %}
+                          <div class="alert alert--{{ category }} alert-dismissible">
+                                <div class="alert__icon icon-check"></div>
+                                <div class="alert__message">{{message}}</div>
+                                <div class="alert_close icon-close" data-dismiss="alert"></div>
+                          </div>
+                        {% endfor %}
+                      {% endif %}
+                    {% endwith %}
+
+                    {% block body %}{% endblock %}
+                </div>
+        <div class="secondary-tabs">
+            <ul class="tabs tabs--tall">
+                <li id="tab-url" class="tab active">
+                    <a><div class="tab-heading" title="urlfiltering">&nbsp;&nbsp;URL Filtering&nbsp;&nbsp;</div></a>
+                </li>
+                <li id="tab-app" class="tab">
+                    <a><div class="tab-heading" title="application">Application Filtering</div></a>
+                </li>
+                <li id="tab-malware" class="tab">
+                    <a><div class="tab-heading" title="malware">Malware Detection</div></a>
+                </li>
+            </ul>
+            <div class="tab-content">
+
+            <form action="/urlfiltering" method="POST">
+
+                <div id="tab-url-content" class="tab-pane active">
+                <!--Access Policy-->
+                <div class="panel panel--loose panel--bordered">
+                        <h6>Access Policy</h6>
+                        <div class="divider divider--thicker"></div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group__text">
+                                    <input name="action" id="action" type="Action" required>
+                                    <label for="Action">Action(Required): </label>
+                                    <div class="required-block">
+                                         <span class="icon-asterisk"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-md-4">
+                                <div class="form-group__text">
+                                    <input name = "nameAp" id="nameAp" type="nameAp" required>
+                                    <label for="nameAp">Name(Required): </label>
+                                    <div class="required-block">
+                                          <span class="icon-asterisk"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-md-4">
+                                <div class="form-group__text">
+                                    <input name = "typeAp" id="typeAp" type="typeAp" disabled>
+                                    <label for="typeAp">Type: Access Policy </label>
+                                </div>
+                            </div>
+                        <br />
+                        </div>
+                    </div>
+                    <br />
+                <!--URL Objects-->
+                    <div class="panel panel--loose panel--bordered">
+                        <h6>URL Object</h6>
+                        <div class="divider divider--thicker"></div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group__text">
+                                    <input name = "url" id="url" type="URL" required>
+                                    <label for="URL">URL(Required): </label>
+                                    <div class="required-block">
+                                         <span class="icon-asterisk"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-md-4">
+                                <div class="form-group__text">
+                                    <input name = "name" id="name" type="name" required>
+                                    <label for="Name">Name(Required): </label>
+                                    <div class="required-block">
+                                         <span class="icon-asterisk"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-md-4">
+                                <div class="form-group__text">
+                                    <input name = "type" id="type" type="type" disabled>
+                                    <label for="Type">Type: URL </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br />
+                        <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group__text">
+                                        <input name = "desc" id="desc" type="desc">
+                                        <label for="Description">Description: </label>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <br />
+                <!--Access Rule-->
+                    <div class="panel panel--loose panel--bordered">
+                        <h6>Access Rule</h6>
+                        <div class="divider divider--thicker"></div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group__text">
+                                    <input name =  "ruleaction" id="ruleaction" required>
+                                    <label for="ruleaction">Action(Required): </label>
+                                    <div class="required-block">
+                                        <span class="icon-asterisk"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-md-4">
+                                <div class="form-group__text">
+                                    <input name = "rulename" id="rulename" type="name" required>
+                                    <label for="rulename">Name(Required): </label>
+                                    <div class="required-block">
+                                        <span class="icon-asterisk"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-md-4">
+                                <div class="form-group__text">
+                                    <input id="ruletype" type="type" disabled>
+                                    <label for="ruletype">Type: Access Rule </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br>
+                        <div class="row">
+                                <button type = "submit" class="btn btn--primary">Configure</button>
+                        </div>
+                    </div>
+                </div>
+                </form>
+
+                <!--Application Filter Tab-->
+                <div id="tab-app-content" class="tab-pane active">
+
+                        <form action="/appfiltering" method="POST">
+                        <div class="panel panel--loose panel--bordered">
+                            <h6>Access Policy</h6>
+                            <div class="divider divider--thicker"></div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group__text">
+                                        <input name="actionapp" id="actionapp" type="Action" required>
+                                        <label for="Action">Action(Required): </label>
+                                        <div class="required-block">
+                                             <span class="icon-asterisk"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="col-md-4">
+                                    <div class="form-group__text">
+                                        <input name = "nameApp" id="nameApp" type="Name" required>
+                                        <label for="nameApp">Name(Required): </label>
+                                        <div class="required-block">
+                                           <span class="icon-asterisk"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="col-md-4">
+                                    <div class="form-group__text">
+                                        <input name = "typeApp" id="typeApp" type="typeApp" disabled>
+                                        <label for="typeApp">Type: Access Policy </label>
+                                    </div>
+                                </div>
+                            <br />
+                            </div>
+                        </div>
+                        <br />
+                                <div class="panel panel--loose text-large" style="height:400px">
+                                      <h6>Application Filter</h6>
+                                      <div class="divider divider--thicker"></div>
+                                          <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group__text">
+                                                        <input name="nameAppRule" id="nameAppRule" type="Name" required>
+                                                        <label for="Name">Name(Required): </label>
+                                                        <div class="required-block">
+                                                             <span class="icon-asterisk"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="col-md-4">
+                                                    <div class="form-group__text">
+                                                        <input name="actionAppRule" id="actionAppRule" type="Action" required>
+                                                        <label for="Action">Action(Required): </label>
+                                                        <div class="required-block">
+                                                             <span class="icon-asterisk"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <div class="col-md-4">
+                                                    <div class="form-group__text">
+                                                        <input type="typeApp" disabled>
+                                                        <label for="typeApp">Type: Access Rule </label>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <br />
+                                                <div class="col-md-4">
+                                                    <div class="form-group__text select">
+                                                        <br />
+                                                        <select name="selectCategory" required>
+                                                            <option value="0" selected>Select Category</option>
+                                                            {% for o in data %}
+                                                                <option value="{{ o[0] }}" id="{{ o[0] }}">{{ o[1] }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                        <label for="selectCategory">Application Category:&nbsp </label>
+                                                        <div class="required-block">
+                                                            <span class="icon-asterisk"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    <br />
+                                    <br />
+                                    <div class="row">
+                                        <button type = "submit" class="btn btn--primary">Configure</button>
+                                    </div>
+                                </div>
+                            <br />
+                        </form>
+                </div>
+
+                <!--Malware Filtering Content-->
+                <div id="tab-malware-content" class="tab-pane animated fadeIn">
+                        <form action="/malwarefiltering" method="POST">
+                                <div class="panel panel--loose text-large" style="height:400px">
+                                      <h6>Malware Detection</h6>
+                                      <div class="divider divider--thicker"></div>
+                                          <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group__text">
+                                                        <input name =  "ruleactionMalware" id="ruleactionMalware" required>
+                                                        <label for="ruleactionMalware">Action(Required): </label>
+                                                        <div class="required-block">
+                                                            <span class="icon-asterisk"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group__text">
+                                                        <input name =  "ruleNameMalware" id="ruleNameMalware" required>
+                                                        <label for="ruleNameMalware">Name(Required): </label>
+                                                        <div class="required-block">
+                                                            <span class="icon-asterisk"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group__text select">
+                                                        <select name="selectPolicy" id="selectPolicy" required>
+                                                            <option value="0" selected>Select Access Policy</option>
+                                                            {% for p in policy_data %}
+                                                                <option value="{{ p[0] }}" id="{{ p[0] }}">{{ p[1] }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                        <label for="selectPolicy">Access Policy: &nbsp </label>
+                                                        <div class="required-block">
+                                                            <span class="icon-asterisk"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <br />
+                                                <br />
+                                                <br />
+                                                <div class="col-md-4">
+                                                    <div class="form-group__text select">
+                                                        <select name="selectMalwarePolicy" id="selectMalwarePolicy" required>
+                                                            <option value="0" selected>Select Malware Policy</option>
+                                                            {% for m in malware_policy %}
+                                                                <option value="{{ m[0] }}" id="{{ m[0] }}">{{ m[1] }}</option>
+                                                            {% endfor %}
+                                                        </select>
+                                                        <label for="selectMalwarePolicy">Malware Policy: &nbsp </label>
+                                                        <div class="required-block">
+                                                            <span class="icon-asterisk"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    <br />
+                                    <br />
+                                    <div class="row">
+                                        <button type = "submit" class="btn btn--primary">Assign</button>
+                                    </div>
+                                </div>
+                            <br />
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+            </main>
+        </div>
+    </body>
+
+</html>
